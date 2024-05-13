@@ -44,6 +44,10 @@ public class Program
         int[] arrmax = {1,2};
         Solutionmax solutionmax= new Solutionmax();
         solutionmax.ThirdMax(arrmax);
+        SolutionDisappearednumber solutionDisappearednumber = new SolutionDisappearednumber();
+        int[] disappear = { 4, 3, 2, 7, 8, 2, 3, 1 };
+        solutionDisappearednumber.FindDisappearedNumbers(disappear);
+
 
 
 
@@ -452,6 +456,43 @@ public class Solutionmax
 
         return (maxnum3 != long.MinValue) ? (int)maxnum3 : (int)maxnum1;
     }
+}
+
+public class SolutionDisappearednumber
+{
+    public IList<int> FindDisappearedNumbers(int[] nums)
+    {
+        Array.Sort(nums);
+        List<int> DisApperednumber = new List<int>();
+        int[] nums2 = new int[nums.Length];
+
+        for (int i = 0; i < nums.Length; i++)
+        {
+            nums2[i] = i + 1;
+
+        }
+        for (int i = 0; i < nums2.Length; i++)
+        {
+            int cnt = 0;
+            for (int j = 0; j < nums.Length; j++)
+            {
+                if (nums2[i] == nums[j])
+                {
+                    cnt = 1;
+                    break;
+                }
+            }
+            if (cnt == 0)
+            {
+                DisApperednumber.Add(nums2[i]);
+
+            }
+
+        }
+        return DisApperednumber;
+
+    }
+
 }
 
 
