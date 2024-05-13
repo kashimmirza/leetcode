@@ -423,28 +423,34 @@ public class Solutionmax
 {
     public int ThirdMax(int[] nums)
     {
-        Array.Sort(nums);
-        Array.Reverse(nums);
-        int thirdMaxnumber = 0;
-        int cnt = 0;
-        for (int i = 0; i < nums.Length - 2; i++)
+        long maxnum1 = long.MinValue;
+        long maxnum2 = long.MinValue;
+        long maxnum3 = long.MinValue;
+        for (int i = 0; i < nums.Length; i++)
         {
-            if (nums[i] > nums[i + 1])
+            if (nums[i] > maxnum1)
             {
-                if (nums[i + 1] > nums[i + 2])
-                {
-                    thirdMaxnumber = nums[i + 2];
-                    cnt = 1;
-                    break;
-                }
+                maxnum3 = maxnum2;
+                maxnum2 = maxnum1;
+                maxnum1 = nums[i];
+            }
+            else if (nums[i] > maxnum2 && nums[i] < maxnum1)
+            {
+                maxnum3 = maxnum2;
+                maxnum2 = nums[i];
+
+
+            }
+            if (nums[i] > maxnum3 && nums[i] < maxnum2)
+            {
+                maxnum3 = nums[i];
+
+
             }
         }
-            if (cnt == 1)
-            {
-                return thirdMaxnumber;
-            }
-            return nums[nums.Length - 1];
-        
+
+
+        return (maxnum3 != long.MinValue) ? (int)maxnum3 : (int)maxnum1;
     }
 }
 
